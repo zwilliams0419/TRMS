@@ -1,0 +1,57 @@
+package com.revature.trms;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class ConnectionFactory
+{	
+	private static Connection conn;
+	
+	//Returns the existing connection if it is valid. Otherwise, returns a new one
+	public static Connection getConnection() throws SQLException {
+		if(conn != null) {
+			if(conn.isValid(2)) {
+				return conn;
+			}
+			else {
+				conn.close();
+			}
+		}
+		
+		String endpoint, port, sid, username, password;
+		
+		Properties p = loadProperties();
+		endpoint = p.getProperty("endpoint", "jdbc:oracle:thin:@trms.cir40oqtm5cv.us-east-2.rds.amazonaws.com");
+		port = p.getProperty("port", "1521");
+		sid = p.getProperty("sid", "ORCL");
+		username = p.getProperty("username", "master");
+		password = p.getProperty("password", "MASTER!!");
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		conn = DriverManager.getConnection(
+				endpoint + ":" + port + ":" + sid,
+				username, password);
+		
+		return conn;
+	}
+	
+	private static Properties loadProperties() {
+		Properties prop = new Properties();
+		
+		try {
+			prop.load(new FileInputStream("connection.properties"));
+			return prop;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+}
