@@ -1,5 +1,7 @@
 package com.revature.trms.dao;
 
+import java.util.List;
+
 import com.revature.trms.ReimbursementRequest;
 
 public interface ReimbursementRequestDAO {
@@ -8,6 +10,8 @@ public interface ReimbursementRequestDAO {
 	
 	public void updateRequest(ReimbursementRequest r);
 	
-	public void getRequest(ReimbursementRequest r);
-
+	public ReimbursementRequest getRequest(ReimbursementRequest r);
+	
+	public List<ReimbursementRequest> getRequestsByEmpID(int emp_id);
+		
 }
