@@ -20,7 +20,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
 			stmt.setString(1,email); 
 			stmt.setInt(2,id);  
 			stmt.executeUpdate();  
-			conn.close();
 		} 
 		catch (SQLException e) 
 		{
@@ -33,21 +32,19 @@ public class EmployeeDAOImp implements EmployeeDAO {
 	{
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from EMPLOYEES WHERE EMP_USERNAME = ?");  
+			PreparedStatement stmt=conn.prepareStatement("SELECT emp_id, emp_password from EMPLOYEES WHERE EMP_USERNAME = ?");  
 			stmt.setString(1, username);
 			ResultSet rs=stmt.executeQuery(); 
 			if(rs.next())
 			{
-				String pass2 = rs.getString(8);
-				if(pass.equals(pass2))
+				int pass2 = rs.getInt("emp_password");
+				if(pass.hashCode() == pass2)
 				{
-					int E_ID = rs.getInt(1);
-					conn.close();
+					int E_ID = rs.getInt("emp_id");
 					return E_ID;
 				}
 				
 			}
-			conn.close();
 
 		} 
 		catch (SQLException e1) 
@@ -77,7 +74,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
 				
 				
 			}
-			conn.close();
 
 		} 
 		catch (SQLException e1) {
