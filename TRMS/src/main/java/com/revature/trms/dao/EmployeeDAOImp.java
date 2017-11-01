@@ -10,12 +10,10 @@ import com.revature.trms.ConnectionFactory;
 
 public class EmployeeDAOImp implements EmployeeDAO {
 	
-	public static ConnectionFactory cf = new ConnectionFactory();
-
+	static Connection conn;
 
 	public void updateEmployeeEmail(int id, String email) 
 	{
-		Connection conn;
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("UPDATE EMPLOYEE SET EMP_EMAIL=? WHERE E_ID=?");  
@@ -33,7 +31,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
 	
 	public Integer loginCheck(String username , String pass)
 	{
-		Connection conn;
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("SELECT * from EMPLOYEES WHERE EMP_USERNAME = ?");  
@@ -62,7 +59,6 @@ public class EmployeeDAOImp implements EmployeeDAO {
 
 	public Employee getEmployee(Employee e) 
 	{
-		Connection conn;
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("SELECT * from EMPLOYEES WHERE EMP_ID = ?");  
