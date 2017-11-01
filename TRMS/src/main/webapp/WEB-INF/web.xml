@@ -19,4 +19,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DropBoxServlet</display-name>
+    <servlet-name>DropBoxServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.DropBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DropBoxServlet</servlet-name>
+    <url-pattern>/DropBoxServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
