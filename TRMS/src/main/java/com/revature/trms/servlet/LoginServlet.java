@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uName = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		System.out.println(uName + password);
 		Integer userEmpId = null;
 		userEmpId = DAOHolder.employeeDAO.loginCheck(uName, password);
 		if(userEmpId != null) {
