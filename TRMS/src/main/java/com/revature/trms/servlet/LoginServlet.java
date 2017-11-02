@@ -29,16 +29,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uName = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		Integer userEmpId = null;
 		userEmpId = DAOHolder.employeeDAO.loginCheck(uName, password);
 		if(userEmpId != null) {
 			request.getSession().setAttribute("userID", userEmpId);
-			response.sendRedirect("SERVLETWITHHOMEPAGE"); //Sends a GET request to the homepage servlet
+			response.sendRedirect("HomepageServlet"); //Sends a GET request to the homepage servlet
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("/LOGINPAGENAME.html/?action=loginerror");
-			rd.forward(request, response);
+			response.sendRedirect("Login.html?action=loginerror"); //Return to login page with a login error
 		}
 	}
 

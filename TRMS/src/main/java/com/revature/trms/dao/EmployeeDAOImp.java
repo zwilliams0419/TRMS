@@ -55,7 +55,7 @@ public class EmployeeDAOImp implements EmployeeDAO {
 	}
 
 	public Employee getEmployee(Employee e) 
-	{
+	{ 
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("SELECT * from EMPLOYEES WHERE EMP_ID = ?");  
