@@ -1,4 +1,4 @@
-package com.revature.trms.pageData;
+package com.revature.trms.page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,12 @@ public class HomepageData {
 	private List<RequestSection> requestSections;
 	private boolean isBenCo;
 	
-	public HomepageData(int emp_id) {
-		super();
-		createRequestSections(emp_id);
+	public static HomepageData getHomepageData(int emp_id) {
+		HomepageData hpd = new HomepageData();
+		hpd.createRequestSections(emp_id);
 		//check if this person is a benco
-	}
-	
-	public HomepageData() {
-		super();
+		
+		return hpd;
 	}
 	
 	

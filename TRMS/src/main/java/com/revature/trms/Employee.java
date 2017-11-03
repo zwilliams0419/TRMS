@@ -8,6 +8,13 @@ public class Employee {
 	private int dep_id;
 	private int supervisor_id;
 	
+	public Employee() {
+		super();
+	}
+	
+	public Employee(int i) {
+		id = i;
+	}
 	
 	public String getFirstName() {
 		return firstName;

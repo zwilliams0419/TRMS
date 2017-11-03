@@ -39,4 +39,14 @@
     <servlet-name>DropBoxServlet</servlet-name>
     <url-pattern>/DropBoxServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewReimbursementRequestServlet</display-name>
+    <servlet-name>NewReimbursementRequestServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.NewReimbursementRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewReimbursementRequestServlet</servlet-name>
+    <url-pattern>/NewReimbursementRequestServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
