@@ -13,7 +13,11 @@ window.onload = function() {
 }
 
 function configureNewForm(data) {
-	
+	$("#empName").val(data.firstName + " " + data.lastName);
+	$("#empName").prop('readonly', true);
+	$("#empId").val(data.employeeId);
+	$("#empId").prop('readonly', true);
+	$("#email").val(data.email);
 }
 
 function configureExistingForm(data) {

@@ -41,7 +41,6 @@ public class ReimbursementFormServlet extends HttpServlet {
 		}
 		
 		LoggingService.getInstance().getLogger().info(rfdJSON);
-		System.out.println(rfdJSON);
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.write(rfdJSON);

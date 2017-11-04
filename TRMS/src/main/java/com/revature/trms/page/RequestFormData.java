@@ -13,6 +13,8 @@ import com.revature.trms.dao.DAOHolder;
 public class RequestFormData implements Serializable {
 	private int employeeId, requestId;
 	private String firstName, lastName, email;
+	private String[] eventTypes;
+	private String[] gradeFormats;
 	
 	public RequestFormData() {
 		super();
@@ -25,6 +27,10 @@ public class RequestFormData implements Serializable {
 		rfd.firstName = e.getFirstName();
 		rfd.lastName = e.getLastName();
 		rfd.email = e.getEmail();
+		
+		//rfd.eventTypes = 
+		//rfd.gradeFormats = 
+		//TODO get these from a DAO
 		
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(rfd);
@@ -79,6 +85,22 @@ public class RequestFormData implements Serializable {
 
 	public void setRequestId(int requestId) {
 		this.requestId = requestId;
+	}
+
+	public String[] getEventTypes() {
+		return eventTypes;
+	}
+
+	public void setEventTypes(String[] eventTypes) {
+		this.eventTypes = eventTypes;
+	}
+
+	public String[] getGradeFormats() {
+		return gradeFormats;
+	}
+
+	public void setGradeFormats(String[] gradeFormats) {
+		this.gradeFormats = gradeFormats;
 	}
 	
 }
