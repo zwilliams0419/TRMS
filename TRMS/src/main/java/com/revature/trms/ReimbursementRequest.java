@@ -17,7 +17,7 @@ public class ReimbursementRequest {
 	private float cost;
 	private String justification;
 	private int approval;
-	private Date startDate;
+	private Date creationDate;
 	private Date statusChangeDate;
 	
 	
@@ -142,12 +142,12 @@ public class ReimbursementRequest {
 		this.approval = approval;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setCreationDate(Date startDate) {
+		this.creationDate = startDate;
 	}
 
 	public Date getStatusChangeDate() {
