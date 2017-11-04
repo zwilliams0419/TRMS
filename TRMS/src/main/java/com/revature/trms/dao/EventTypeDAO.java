@@ -7,7 +7,7 @@ import com.revature.trms.EventType;
 
 public interface EventTypeDAO {
 	
-	public EventType getEventType(int e_ID);
+	public EventType getEventType(int e_Id);
 	
 	public List<EventType> getAllEventTypes();
 
