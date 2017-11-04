@@ -6,7 +6,7 @@ import com.revature.trms.GradeFormat;
 
 public interface GradeFormatDAO {
 
-	public GradeFormat getGradeFormat(int g_ID);
+	public GradeFormat getGradeFormat(int g_Id);
 	
 	public List<GradeFormat> getAllGradeFormats();
 	

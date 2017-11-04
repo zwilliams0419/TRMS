@@ -13,19 +13,19 @@ import com.revature.trms.GradeFormat;
 public class GradeFormatDAOImp implements GradeFormatDAO {
 
 	static Connection conn;
-	public GradeFormat getGradeFormat(int g_ID) {
+	public GradeFormat getGradeFormat(int g_Id) {
 		
 		GradeFormat e = new GradeFormat();
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from EVENT_TYPES WHERE EVENT_ID = ?");  
-			stmt.setInt(1, e_Id);
+			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT WHERE EVENT_ID = ?");  
+			stmt.setInt(1, g_Id);
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
-				e.setName(rs.getString("EVENT_NAME"));
-				e.setRate(rs.getFloat("EVENT_COVERAGE"));
+				//e.setName(rs.getString("EVENT_NAME"));
+				//e.setRate(rs.getFloat("EVENT_COVERAGE"));
 			}
 
 		} 
