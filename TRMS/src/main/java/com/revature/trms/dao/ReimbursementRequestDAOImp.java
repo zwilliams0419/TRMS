@@ -38,7 +38,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 			
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("insert into (REQ_ID, REQ_REQUESTER_ID, REQ_GRADE_FORMAT, REQ_EVENT_TYPE, REQ_EVENT_DATE, REQ_ADDRESS, REQ_STATE, REQ_CITY, REQ_ZIP, REQ_DESCRIPTION, REQ_COST, REQ_JUSTIFICATION, REQ_APPROVAL) REIMBURSEMENT_REQUESTS VALUES = ?,?,?,?,TO_DATE(?, 'YY-MM-DD HH24:MI'),?,?,?,?,?,?,?,?");  
+			PreparedStatement stmt=conn.prepareStatement("insert into (REQ_ID, REQ_REQUESTER_ID, REQ_GRADE_FORMAT, REQ_EVENT_TYPE, REQ_EVENT_DATE, REQ_ADDRESS, REQ_STATE, REQ_CITY, REQ_ZIP, REQ_DESCRIPTION, REQ_COST, REQ_JUSTIFICATION, REQ_APPROVAL, REQ_PASSING_GRADE) REIMBURSEMENT_REQUESTS VALUES = ?,?,?,?,TO_DATE(?, 'YY-MM-DD HH24:MI'),?,?,?,?,?,?,?,?,?");  
 			stmt.setInt(1, r.getRequestId());
 			stmt.setInt(2, r.getEmployeeId());
 			stmt.setInt(3, r.getGradeFormat());
@@ -52,6 +52,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 			stmt.setFloat(11, r.getCost());
 			stmt.setString(12, r.getJustification());
 			stmt.setInt(13, r.getApproval());
+			stmt.setInt(13, r.getPassingGrade());
 			stmt.executeUpdate(); 
 	
 		} 
@@ -74,7 +75,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("UPDATE REIMBURSEMENT_REQUESTS SET REQ_REQUESTER_ID=?, REQ_BENCO_ID=?, REQ_GRADE_FORMAT=?, REQ_EVENT_TYPE=?, REQ_EVENT_DATE=?, REQ_ADDRESS=?, REQ_STATE=?, REQ_CITY=?, REQ_ZIP=?, REQ_DESCRIPTION=?, REQ_COST=?, REQ_JUSTIFICATION=?, REQ_APPROVAL=? WHERE REQ_ID=?");  
+			PreparedStatement stmt=conn.prepareStatement("UPDATE REIMBURSEMENT_REQUESTS SET REQ_REQUESTER_ID=?, REQ_BENCO_ID=?, REQ_GRADE_FORMAT=?, REQ_EVENT_TYPE=?, REQ_EVENT_DATE=?, REQ_ADDRESS=?, REQ_STATE=?, REQ_CITY=?, REQ_ZIP=?, REQ_DESCRIPTION=?, REQ_COST=?, REQ_JUSTIFICATION=?, REQ_APPROVAL=?, REQ_PASSING_GRADE=?, REQ_FINAL_GRADE=? WHERE REQ_ID=?");  
 			stmt.setInt(1, r.getEmployeeId());
 			stmt.setInt(2, r.getBencoId());
 			stmt.setInt(3, r.getGradeFormat());
@@ -89,6 +90,8 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 			stmt.setString(12, r.getJustification());
 			stmt.setInt(13, r.getApproval());
 			stmt.setInt(14, r.getRequestId());
+			stmt.setInt(15, r.getPassingGrade());
+			stmt.setFloat(16, r.getFinalGrade());
 			stmt.executeUpdate();  
 		} 
 		catch (SQLException e) 
@@ -123,6 +126,9 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 				r.setCost(rs.getFloat("REQ_COST"));
 				r.setJustification(rs.getString("REQ_JUSTIFICATION"));
 				r.setApproval(rs.getInt("REQ_APPROVAL"));
+				r.setPassingGrade(rs.getInt("REQ_PASSING_GRADE"));
+				r.setFinalGrade(rs.getFloat("REQ_FINAL_GRADE"));
+				
 				Date date2 = formatter.parse(rs.getString("REQ_CREATION_DATE"));
 				r.setCreationDate(date2);
 
@@ -170,6 +176,8 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 				//setting string to a date
 				Date date2 = formatter.parse(rs.getString("REQ_CREATION_DATE"));
 				r.setCreationDate(date2);
+				r.setPassingGrade(rs.getInt("REQ_PASSING_GRADE"));
+				r.setFinalGrade(rs.getFloat("REQ_FINAL_GRADE"));
 				myRequests.add(r);
 				
 			}

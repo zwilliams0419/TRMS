@@ -19,6 +19,8 @@ public class ReimbursementRequest {
 	private int approval;
 	private Date creationDate;
 	private Date statusChangeDate;
+	private int passingGrade;
+	private float finalGrade;
 	
 	
 	
@@ -156,5 +158,21 @@ public class ReimbursementRequest {
 
 	public void setStatusChangeDate(Date statusChangeDate) {
 		this.statusChangeDate = statusChangeDate;
+	}
+
+	public int getPassingGrade() {
+		return passingGrade;
+	}
+
+	public void setPassingGrade(int passingGrade) {
+		this.passingGrade = passingGrade;
+	}
+
+	public float getFinalGrade() {
+		return finalGrade;
+	}
+
+	public void setFinalGrade(float finalGrade) {
+		this.finalGrade = finalGrade;
 	}
 }
