@@ -1,23 +1,31 @@
 package com.revature.trms.page;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.trms.ReimbursementRequest;
 import com.revature.trms.dao.DAOHolder;
 
 //We can use this class to find all of the data to be displayed on the homepage,
-//convert it to JSON, and send it to the JS
-public class HomepageData {
+//as a JSON string
+public class HomepageData implements Serializable {
 	private List<RequestSection> requestSections;
 	private boolean isBenCo;
 	
-	public static HomepageData getHomepageData(int emp_id) {
+	public HomepageData() {
+		super();
+	}
+	
+	public static String getHomepageData(int emp_id) throws JsonProcessingException {
 		HomepageData hpd = new HomepageData();
 		hpd.createRequestSections(emp_id);
 		//check if this person is a benco
 		
-		return hpd;
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(hpd);
 	}
 	
 	

@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		Integer userEmpId = null;
 		userEmpId = DAOHolder.employeeDAO.loginCheck(uName, password);
 		if(userEmpId != null) {
-			request.getSession().setAttribute("userID", userEmpId);
+			request.getSession().setAttribute("userId", userEmpId.intValue());
 			response.sendRedirect("Home.html");
 		}
 		else {

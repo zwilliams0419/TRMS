@@ -41,12 +41,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>NewReimbursementRequestServlet</display-name>
-    <servlet-name>NewReimbursementRequestServlet</servlet-name>
-    <servlet-class>com.revature.trms.servlet.NewReimbursementRequestServlet</servlet-class>
+    <display-name>ReimbursementFormServlet</display-name>
+    <servlet-name>ReimbursementFormServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ReimbursementFormServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NewReimbursementRequestServlet</servlet-name>
-    <url-pattern>/NewReimbursementRequestServlet</url-pattern>
+    <servlet-name>ReimbursementFormServlet</servlet-name>
+    <url-pattern>/ReimbursementFormServlet</url-pattern>
   </servlet-mapping>
 </web-app>

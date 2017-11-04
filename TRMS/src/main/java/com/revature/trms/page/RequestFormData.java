@@ -1,39 +1,44 @@
 package com.revature.trms.page;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.trms.Employee;
 import com.revature.trms.ReimbursementRequest;
 import com.revature.trms.dao.DAOHolder;
 
 
 //Contains the data that is used to create a new reimbursement request
-public class RequestFormData {
+public class RequestFormData implements Serializable {
 	private int employeeId, requestId;
 	private String firstName, lastName, email;
-	private String isNew; //Indicates whether the data is for a new form or an existing one
 	
-	public static RequestFormData getNewRequestFormData(int empId) {
+	public RequestFormData() {
+		super();
+	}
+	
+	public static String getNewRequestFormData(int empId) throws JsonProcessingException {
 		RequestFormData rfd = new RequestFormData();
 		Employee e = DAOHolder.employeeDAO.getEmployee(new Employee(empId));
-		rfd.setEmployeeId(e.getId());
+		rfd.employeeId = e.getId();
 		rfd.firstName = e.getFirstName();
 		rfd.lastName = e.getLastName();
 		rfd.email = e.getEmail();
 		
-		rfd.isNew = String.valueOf(true);
-		
-		return rfd;
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(rfd);
 	}
 	
-	public static RequestFormData getExistingRequestFormData(int reqId) {
+	public static String getExistingRequestFormData(int reqId) throws JsonProcessingException {
 		RequestFormData rfd = new RequestFormData();
 		ReimbursementRequest r = DAOHolder.reimbursementRequestDAO.getRequest(new ReimbursementRequest(reqId));
 		Employee e = DAOHolder.employeeDAO.getEmployee(new Employee(r.getEmployeeId()));
 		
 		//load all of the fields
 		
-		rfd.isNew = String.valueOf(false);
-		
-		return rfd;
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(rfd);
 	}
 	
 	public String getFirstName() {
@@ -74,14 +79,6 @@ public class RequestFormData {
 
 	public void setRequestId(int requestId) {
 		this.requestId = requestId;
-	}
-
-	public String getIsNew() {
-		return isNew;
-	}
-
-	public void setIsNew(String isNew) {
-		this.isNew = isNew;
 	}
 	
 }
