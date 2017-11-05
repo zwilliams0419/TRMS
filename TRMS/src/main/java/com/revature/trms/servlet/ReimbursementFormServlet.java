@@ -58,6 +58,7 @@ public class ReimbursementFormServlet extends HttpServlet {
 		ReimbursementRequest r = fillNewReimbursementRequest(request);
 		
 		DAOHolder.reimbursementRequestDAO.createRequest(r);
+		DAOHolder.employeeDAO.updateEmployeeEmail(Integer.parseInt(request.getParameter("requesterId")), request.getParameter("email"));
 		
 		response.sendRedirect("Home.html");
 	}
