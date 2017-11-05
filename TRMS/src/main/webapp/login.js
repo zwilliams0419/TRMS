@@ -9,7 +9,7 @@ function checkForError(u) {
 	let a = url.searchParams.get("action");
 	if(a == "loginerror") {
 		//Display an error message above the login fields
-		$('body').prepend("<p>Invalid login credentials</p>");
+		$(".title").append("<p id = 'error'>Invalid login credentials</p>");
 	}
 }
 
