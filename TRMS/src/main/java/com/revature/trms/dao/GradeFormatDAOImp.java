@@ -16,10 +16,10 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 	public GradeFormat getGradeFormat(int g_Id) {
 
 		GradeFormat g = new GradeFormat();
-
+		
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT WHERE EVENT_ID = ?");  
+			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT WHERE GF_ID = ?");  
 			stmt.setInt(1, g_Id);
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
@@ -37,28 +37,27 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 	}
 
 	public List<GradeFormat> getAllGradeFormats() {
-		List<GradeFormat> myGrades = new ArrayList<GradeFormat>();
-		
+
+		List<GradeFormat> myGradeFormats = new ArrayList<GradeFormat>();
+
+		GradeFormat g = new GradeFormat();
 
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMATS");  
+			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT");  
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
-				GradeFormat g = new GradeFormat();
-				g.setId(rs.getInt("GF_ID"));
 				g.setName(rs.getString("GF_NAME"));
 				g.setMaxGrade(rs.getInt("GF_MAX_GRADE"));
 				g.setDefaultPassing(rs.getInt("GF_DEFAULT_PASSING"));
-				myGrades.add(g);
+				myGradeFormats.add(g);
 			}
 
 		} 
 		catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-
-		return myGrades;
+		return myGradeFormats;
 	}
 }
