@@ -1,8 +1,9 @@
 package com.revature.trms;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ReimbursementRequest {
+public class ReimbursementRequest implements Serializable {
 	private int requestId;
 	private int employeeId;
 	private int bencoId;
@@ -21,7 +22,7 @@ public class ReimbursementRequest {
 	private Date statusChangeDate;
 	private int passingGrade;
 	private float finalGrade;
-	
+	private float reimbursementAmount;
 	
 	
 	public ReimbursementRequest() {
@@ -174,5 +175,13 @@ public class ReimbursementRequest {
 
 	public void setFinalGrade(float finalGrade) {
 		this.finalGrade = finalGrade;
+	}
+
+	public float getReimbursementAmount() {
+		return reimbursementAmount;
+	}
+
+	public void setReimbursementAmount(float reimbursementAmount) {
+		this.reimbursementAmount = reimbursementAmount;
 	}
 }

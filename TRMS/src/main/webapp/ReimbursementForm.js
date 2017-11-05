@@ -5,6 +5,7 @@ var eventTypes;
 
 window.onload = function() {
 	$("#passingGradeDiv").hide();
+	$("body").hide();
 
 	var url = new URL(location.href);
 	var reqId = url.searchParams.get("id");
@@ -18,6 +19,8 @@ window.onload = function() {
 	$("#cost").on("change", updateReimbursementAmount);
 	$("#eventType").on("change", updateReimbursementAmount);
 	$("#gradeFormat").on("change", updatePassingGrade);
+
+	$("body").show();
 }
 
 
