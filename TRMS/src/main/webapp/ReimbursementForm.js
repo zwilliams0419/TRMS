@@ -1,6 +1,11 @@
 "use strict";
 
+var gradeFormats;
+var eventTypes;
+
 window.onload = function() {
+	$("#passingGradeDiv").hide();
+
 	var url = new URL(location.href);
 	var reqId = url.searchParams.get("id");
 
@@ -9,12 +14,17 @@ window.onload = function() {
 	} else {
 		$.getJSON("ReimbursementFormServlet", { id: JSON.stringify(reqId) }, configureExistingForm);
 	}
-	
+
+	$("#cost").on("change", updateReimbursementAmount);
+	$("#eventType").on("change", updateReimbursementAmount);
+	$("#gradeFormat").on("change", updatePassingGrade);
 }
 
 
 
 function configureNewForm(data) {
+	setReferenceTables(data);
+
 	$("#requesterName").val(data.firstName + " " + data.lastName);
 	$("#requesterName").prop('readonly', true);
 	$("#requesterId").val(data.requesterId);
@@ -25,15 +35,38 @@ function configureNewForm(data) {
 }
 
 function configureExistingForm(data) {
-	
+	setReferenceTables(data);
 }
 
 function updateReimbursementAmount() {
+	if(isNaN($("#cost").val())) {
+		$("#reimbursement").val(null);
+		return;
+	}
 
+	$.each(eventTypes, function(i, event) {
+		if (event.id == $('#eventType').val()) {
+			$("#reimbursement").val($('#cost').val() * event.rate / 100);
+		}
+	})
+	
 }
 
-function updateDefaultPassing() {
+function updatePassingGrade() {
+	$.each(gradeFormats, function(i, grade) {
+		//Find the grade that matches the currently selected grade format
+		if (grade.id == $('#gradeFormat').val()) {
+			$("#passingGrade").val(grade.defaultPassing);
 
+			//Hide the passing grade if the max is 1 or 0, or display it otherwise
+			if(grade.maxGrade == 1 || grade.maxGrade == 0) {
+				$("#passingGradeDiv").hide();
+			}
+			else {
+				$("#passingGradeDiv").show();
+			}
+		}
+	})
 }
 
 function populateDropdowns(data) {
@@ -50,4 +83,9 @@ function populateDropdowns(data) {
 	        text : event.name 
 	    }));
 	});
+}
+
+function setReferenceTables(data) {
+	gradeFormats = data.gradeFormats;
+	eventTypes = data.eventTypes;
 }
