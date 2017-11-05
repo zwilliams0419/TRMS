@@ -4,39 +4,25 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
 		<title> Tuition Reimbursement Login Page | Welcome to Login Page</title>
-		
-		<link rel="beta" href="./css/style.css">
+		<link rel="stylesheet" href="Login.css">
 		</head>
 		<body>
-
-         <!--  -->
-			<form class="form-horizontal" action="LoginServlet" method="POST">
-				<fieldset>
-					<div class="form-group">
-						<label for="inputUsername" class="col-lg-2 control-label">Username</label>
-						<div class="col-lg-10">
-							<input type="text" class="form-control" name="username" placeholder="Username">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword" class="col-lg-2 control-label">Password</label>
-						<div class="col-lg-10">
-							<input type="Password" class="form-control" name="password" placeholder="Password">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-lg-10 col-lg-2">
-							<!--  button type="reset" class="btn btn-default">Cancel</button -->
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-			
-			<footer>
-			 	<p> TRMS Web Design, Copyright &copy; 2017</p>
-			 </footer>
-			 
+			<div class = "title"><h1> Sign In Page</h1></div>
+			<div class = "container"> 
+				<div class="left"></div>
+				<div class="right">
+					<div class="formBox">
+						<form action="LoginServlet" method="POST">
+							<p>Username</p>
+							<input type="text" name="" placeholder="Online">
+							<p>Password</p>
+							<input type="Password" name="" placeholder="*********">
+							<input type="submit" name="" value="Sign In">
+						
+						</form>
+					</div>	
+				</div>
+			</div>
 			 <script src="jquery-3.2.1.js"></script>
 			 <script type="text/javascript" src="login.js"><</script>
 		</body>
