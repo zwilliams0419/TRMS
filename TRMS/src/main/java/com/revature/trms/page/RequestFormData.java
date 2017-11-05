@@ -42,7 +42,7 @@ public class RequestFormData implements Serializable {
 	}
 	
 	public static String getExistingRequestFormData(int reqId) throws JsonProcessingException {
-		SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfr = new SimpleDateFormat("MM/dd/yyyy");
 		
 		RequestFormData rfd = new RequestFormData();
 		ReimbursementRequest r = DAOHolder.reimbursementRequestDAO.getRequest(new ReimbursementRequest(reqId));
@@ -65,7 +65,7 @@ public class RequestFormData implements Serializable {
 		rfd.state = r.getState();
 		rfd.description = r.getDescription();
 		rfd.justification = r.getJustification();
-		rfd.eventDate = sdfr.format(r.getCreationDate());
+		rfd.creationDate = sdfr.format(r.getCreationDate());
 		rfd.reimbursementAmount = r.getReimbursementAmount();
 		rfd.finalGrade = r.getFinalGrade();
 		rfd.setEventTypes(DAOHolder.eventTypeDAO.getAllEventTypes());

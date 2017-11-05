@@ -38,6 +38,7 @@ public class ReimbursementFormServlet extends HttpServlet {
 		String rfdJSON = null;
 		
 		if(id != null) {
+			id = id.replaceAll("\"", "");
 			rfdJSON = RequestFormData.getExistingRequestFormData(Integer.parseInt(id));
 		}
 		else {
@@ -92,7 +93,7 @@ public class ReimbursementFormServlet extends HttpServlet {
 		r.setPassingGrade(Integer.parseInt(request.getParameter("passingGrade")));
 		
 		//Set the reimbursement amount at creation based on the cost and the event type. A benco can change it later
-		r.setReimbursementAmount(r.getCost() * DAOHolder.eventTypeDAO.getEventType(r.getEventType()).getRate());
+		r.setReimbursementAmount(r.getCost() * DAOHolder.eventTypeDAO.getEventType(r.getEventType()).getRate() / 100);
 		
 		try {
 			r.setEventDate(sdfr.parse( request.getParameter("date")));
