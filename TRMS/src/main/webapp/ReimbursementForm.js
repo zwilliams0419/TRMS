@@ -2,6 +2,7 @@
 
 var gradeFormats;
 var eventTypes;
+var role;
 
 window.onload = function() {
 	$("#passingGradeDiv").hide();
@@ -11,6 +12,7 @@ window.onload = function() {
 	var reqId = url.searchParams.get("id");
 
 	if(!reqId) {
+		$("#requestId").hide();
 		$.getJSON("ReimbursementFormServlet", configureNewForm);
 	} else {
 		$.getJSON("ReimbursementFormServlet", { id: JSON.stringify(reqId) }, configureExistingForm);
@@ -19,14 +21,12 @@ window.onload = function() {
 	$("#cost").on("change", updateReimbursementAmount);
 	$("#eventType").on("change", updateReimbursementAmount);
 	$("#gradeFormat").on("change", updatePassingGrade);
-
-	$("body").show();
 }
 
 
 
 function configureNewForm(data) {
-	setReferenceTables(data);
+	setGlobals(data);
 
 	$("#requesterName").val(data.firstName + " " + data.lastName);
 	$("#requesterName").prop('readonly', true);
@@ -35,10 +35,40 @@ function configureNewForm(data) {
 	$("#email").val(data.email);
 
 	populateDropdowns(data);
+	$("body").show();
 }
 
 function configureExistingForm(data) {
-	setReferenceTables(data);
+	setGlobals(data);
+
+	$("#requestForm").prop('method', 'PUT');
+	$("#requestFormBtn").html("Save");
+
+	$("#requestId").val(data.requestId);
+	$("#requesterName").val(data.firstName + " " + data.lastName);
+	$("#requesterName").prop('readonly', true);
+	$("#requesterId").val(data.requesterId);
+	$("#requesterId").prop('readonly', true);
+	$("#email").val(data.email);
+	$("#gradeFormat").val(data.gradeFormat);
+	$("#eventType").val(data.eventType);
+	$("#zip").val(data.zip);
+	//$("#approval").val(data.approval);
+	$("#passingGrade").val(data.passingGrade);
+	$("#cost").val(data.cost);
+	$("#address").val(data.address);
+	$("#city").val(data.city);
+	$("#state").val(data.state);
+	$("#desc").val(data.description);
+	$("#workJustification").val(data.justification);
+	$("#date").val(data.eventDate);
+	$("#reimbursement").val(data.reimbursementAmount);
+	//$("#finalGrade").val(data.finalGrade);
+	//$("#creationDate").val(data.creationDate);
+
+	configureByRole();
+	populateDropdowns(data);
+	$("body").show();
 }
 
 function updateReimbursementAmount() {
@@ -88,7 +118,23 @@ function populateDropdowns(data) {
 	});
 }
 
-function setReferenceTables(data) {
+function configureByRole() {
+	if(role == 1) {
+		$("#gradeFormat").prop('readonly', true);
+		$("#eventType").prop('readonly', true);
+		$("#zip").prop('readonly', true);
+		$("#address").prop('readonly', true);
+		$("#city").prop('readonly', true);
+		$("#cost").prop('readonly', true);
+		$("#state").prop('readonly', true);
+		$("#description").prop('readonly', true);
+		$("#justification").prop('readonly', true);
+		$("#date").prop('readonly', true);
+	}
+}
+
+function setGlobals(data) {
 	gradeFormats = data.gradeFormats;
 	eventTypes = data.eventTypes;
+	role = data.role;
 }

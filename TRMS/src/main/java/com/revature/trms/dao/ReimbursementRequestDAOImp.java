@@ -28,7 +28,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 			return;
 		}
 		String eventDateString = null;
-		SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfr = new SimpleDateFormat("yyyy/MM/dd");
 		try{
 			eventDateString = sdfr.format( r.getEventDate() );
 		}
@@ -105,7 +105,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 
 	public ReimbursementRequest getRequest(ReimbursementRequest r) 
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("SELECT * from REIMBURSEMENT_REQUESTS WHERE REQ_ID = ?");  
@@ -118,6 +118,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 				r.setGradeFormat(rs.getInt("REQ_GRADE_FORMAT"));
 				r.setEventType(rs.getInt("REQ_EVENT_TYPE"));
 				//setting date a bit grosser
+				System.out.println(rs.getString("REQ_EVENT_DATE"));
 				Date date = formatter.parse(rs.getString("REQ_EVENT_DATE"));
 				r.setEventDate(date);
 				r.setAddress(rs.getString("REQ_ADDRESS"));
