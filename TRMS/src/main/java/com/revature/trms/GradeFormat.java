@@ -3,6 +3,7 @@ package com.revature.trms;
 import java.io.Serializable;
 
 public class GradeFormat implements Serializable {
+	private int id;
 	private String name;
 	private int maxGrade;
 	private int defaultPassing;
@@ -24,5 +25,11 @@ public class GradeFormat implements Serializable {
 	}
 	public void setDefaultPassing(int defaultPassing) {
 		this.defaultPassing = defaultPassing;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 }

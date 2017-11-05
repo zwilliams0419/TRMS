@@ -65,7 +65,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 	public void updateRequest(ReimbursementRequest r) 
 	{
 		String eventDateString = null;
-		SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
+		SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
 		try{
 			eventDateString = sdfr.format( r.getEventDate() );
 		}
@@ -103,7 +103,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 
 	public ReimbursementRequest getRequest(ReimbursementRequest r) 
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			conn = ConnectionFactory.getConnection();
 			PreparedStatement stmt=conn.prepareStatement("SELECT * from REIMBURSEMENT_REQUESTS WHERE REQ_ID = ?");  
@@ -146,9 +146,8 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 
 	public List<ReimbursementRequest> getRequestsByEmpID(int emp_id) 
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		List<ReimbursementRequest> myRequests = new ArrayList<ReimbursementRequest>();
-		ReimbursementRequest r = new ReimbursementRequest();
 		
 		try {
 			conn = ConnectionFactory.getConnection();
@@ -157,6 +156,7 @@ public class ReimbursementRequestDAOImp implements ReimbursementRequestDAO
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{
+				ReimbursementRequest r = new ReimbursementRequest();
 				r.setRequestId(rs.getInt("REQ_ID"));
 				r.setEmployeeId(emp_id);
 				r.setBencoId(rs.getInt("REQ_BENCO_ID"));

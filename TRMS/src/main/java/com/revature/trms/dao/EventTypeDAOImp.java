@@ -27,6 +27,7 @@ public class EventTypeDAOImp implements EventTypeDAO
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
+				e.setId(rs.getInt("EVENT_ID"));
 				e.setName(rs.getString("EVENT_NAME"));
 				e.setRate(rs.getFloat("EVENT_COVERAGE"));
 			}
@@ -41,7 +42,6 @@ public class EventTypeDAOImp implements EventTypeDAO
 	public List<EventType> getAllEventTypes() 
 	{
 		List<EventType> myEvents = new ArrayList<EventType>();
-		EventType e = new EventType();
 		
 		try {
 			conn = ConnectionFactory.getConnection();
@@ -49,6 +49,8 @@ public class EventTypeDAOImp implements EventTypeDAO
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
+				EventType e = new EventType();
+				e.setId(rs.getInt("EVENT_ID"));
 				e.setName(rs.getString("EVENT_NAME"));
 				e.setRate(rs.getFloat("EVENT_COVERAGE"));
 				myEvents.add(e);

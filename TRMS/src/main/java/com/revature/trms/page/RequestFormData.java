@@ -1,20 +1,24 @@
 package com.revature.trms.page;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.trms.Employee;
+import com.revature.trms.EventType;
+import com.revature.trms.GradeFormat;
 import com.revature.trms.ReimbursementRequest;
 import com.revature.trms.dao.DAOHolder;
 
 
 //Contains the data that is used to create a new reimbursement request
 public class RequestFormData implements Serializable {
-	private int employeeId, requestId;
+	private int requesterId, requestId;
+	private int role; //1 for creator, 2 for approver, 3 for Benco
 	private String firstName, lastName, email;
-	private String[] eventTypes;
-	private String[] gradeFormats;
+	private List<EventType> eventTypes;
+	private List<GradeFormat> gradeFormats;
 	
 	public RequestFormData() {
 		super();
@@ -23,14 +27,12 @@ public class RequestFormData implements Serializable {
 	public static String getNewRequestFormData(int empId) throws JsonProcessingException {
 		RequestFormData rfd = new RequestFormData();
 		Employee e = DAOHolder.employeeDAO.getEmployee(new Employee(empId));
-		rfd.employeeId = e.getId();
+		rfd.requesterId = e.getId();
 		rfd.firstName = e.getFirstName();
 		rfd.lastName = e.getLastName();
 		rfd.email = e.getEmail();
-		
-		//rfd.eventTypes = 
-		//rfd.gradeFormats = 
-		//TODO get these from a DAO
+		rfd.setEventTypes(DAOHolder.eventTypeDAO.getAllEventTypes());
+		rfd.setGradeFormats(DAOHolder.gradeFormatDAO.getAllGradeFormats());
 		
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(rfd);
@@ -71,12 +73,12 @@ public class RequestFormData implements Serializable {
 		this.email = email;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
+	public int getRequesterId() {
+		return requesterId;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setRequesterId(int requesterId) {
+		this.requesterId = requesterId;
 	}
 
 	public int getRequestId() {
@@ -87,20 +89,27 @@ public class RequestFormData implements Serializable {
 		this.requestId = requestId;
 	}
 
-	public String[] getEventTypes() {
+	public List<EventType> getEventTypes() {
 		return eventTypes;
 	}
 
-	public void setEventTypes(String[] eventTypes) {
+	public void setEventTypes(List<EventType> eventTypes) {
 		this.eventTypes = eventTypes;
 	}
 
-	public String[] getGradeFormats() {
+	public List<GradeFormat> getGradeFormats() {
 		return gradeFormats;
 	}
 
-	public void setGradeFormats(String[] gradeFormats) {
+	public void setGradeFormats(List<GradeFormat> gradeFormats) {
 		this.gradeFormats = gradeFormats;
 	}
-	
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}	
 }
