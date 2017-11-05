@@ -19,7 +19,7 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT WHERE GF_ID = ?");  
+			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMATS WHERE GF_ID = ?");  
 			stmt.setInt(1, g_Id);
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
@@ -40,14 +40,13 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 
 		List<GradeFormat> myGradeFormats = new ArrayList<GradeFormat>();
 
-		GradeFormat g = new GradeFormat();
-
 		try {
 			conn = ConnectionFactory.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMAT");  
+			PreparedStatement stmt=conn.prepareStatement("SELECT * from GRADE_FORMATS");  
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
+				GradeFormat g = new GradeFormat();
 				g.setName(rs.getString("GF_NAME"));
 				g.setMaxGrade(rs.getInt("GF_MAX_GRADE"));
 				g.setDefaultPassing(rs.getInt("GF_DEFAULT_PASSING"));

@@ -60,10 +60,10 @@ function updatePassingGrade() {
 
 			//Hide the passing grade if the max is 1 or 0, or display it otherwise
 			if(grade.maxGrade == 1 || grade.maxGrade == 0) {
-				$("#passingGradeDiv").hide();
+				$("#passingGradeDiv").hide(400);
 			}
 			else {
-				$("#passingGradeDiv").show();
+				$("#passingGradeDiv").show(400);
 			}
 		}
 	})
