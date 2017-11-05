@@ -24,6 +24,7 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next())
 			{	
+				g.setId(rs.getInt("GF_ID"));
 				g.setName(rs.getString("GF_NAME"));
 				g.setMaxGrade(rs.getInt("GF_MAX_GRADE"));
 				g.setDefaultPassing(rs.getInt("GF_DEFAULT_PASSING"));
@@ -47,6 +48,7 @@ public class GradeFormatDAOImp implements GradeFormatDAO {
 			while(rs.next())
 			{	
 				GradeFormat g = new GradeFormat();
+				g.setId(rs.getInt("GF_ID"));
 				g.setName(rs.getString("GF_NAME"));
 				g.setMaxGrade(rs.getInt("GF_MAX_GRADE"));
 				g.setDefaultPassing(rs.getInt("GF_DEFAULT_PASSING"));
