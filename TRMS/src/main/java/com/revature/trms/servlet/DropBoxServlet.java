@@ -94,7 +94,7 @@ public class DropBoxServlet extends HttpServlet {
 		@SuppressWarnings("deprecation")
 		DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, "sX6La58QE8AAAAAAAAAADGtkdusZpjqGbRhw8U7JUy7TJSZNTv378sR8qcvnnN1U");
-        System.out.println("FWOG");
+
         try {
 			for (Part part2 : request.getParts()) {
 			    String fileName = extractFileName(part2);

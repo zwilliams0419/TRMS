@@ -18,6 +18,7 @@ window.onload = function() {
 		$.getJSON("ReimbursementFormServlet", { id: JSON.stringify(reqId) }, configureExistingForm);
 	}
 
+	$("#uploadBtn").on("click", uploadFile);
 	$("#cost").on("change", updateReimbursementAmount);
 	$("#eventType").on("change", updateReimbursementAmount);
 	$("#gradeFormat").on("change", updatePassingGrade);
@@ -35,6 +36,7 @@ function configureNewForm(data) {
 	$("#email").val(data.email);
 
 	populateDropdowns(data);
+	$("#uploaderDiv").hide();
 	$("body").show();
 }
 
@@ -138,3 +140,17 @@ function setGlobals(data) {
 	eventTypes = data.eventTypes;
 	role = data.role;
 }
+
+function uploadFile() 
+{
+
+    var xhr = new XMLHttpRequest();       
+
+    xhr.open("POST","DropBoxServlet", true);
+
+    var fileData = new FormData();
+    fileData.append("file", $("#uploader")[0].files[0]);
+    fileData.append("requestId", $("#requestId").val());
+    //console.log("FWOGGGGG");
+    xhr.send(fileData);
+} 
